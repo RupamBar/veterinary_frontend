@@ -8,7 +8,6 @@ import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
 import CallOutlinedIcon from '@material-ui/icons/CallOutlined';
 import "./Header.css";
 import { makeStyles } from "@material-ui/core";
-import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   // Define your styles here
@@ -31,18 +30,18 @@ const useStyles = makeStyles((theme) => ({
   callBox : {
     fontFamily: "'Manrope', sans-serif",
     fontWeight: '700',
-  }
+  },
 }));
 
-function Header() {
+function AuthorizedHeader({user, handleLogout}) {
   const classes = useStyles();
-  const navigate = useNavigate();
   const [animalFood, setAnimalFoods] = useState(null);
   const [anchorElAnimals, setAnchorElAnimals] = useState(null);
   const [anchorElMedicines, setAnchorElMedicines] = useState(null);
   const [anchorElAssets, setAnchorElAssets] = useState(null);
   const [anchorElGrooming, setAnchorElGrooming] = useState(null);
   const [anchorElCheckUp, setAnchorElCheckUp] = useState(null);
+  const [anchorElLogout, setAnchorElLogout] = useState(null);
 
   const handleClick = (event, str) => {
     if(str === 'animalFoods')
@@ -57,6 +56,8 @@ function Header() {
     setAnchorElGrooming(event.currentTarget);
     else if(str === 'checkUp')
     setAnchorElCheckUp(event.currentTarget);
+    else if(str === 'logout')
+    setAnchorElLogout(event.currentTarget);
   };
 
   const handleClose = () => {
@@ -66,6 +67,7 @@ function Header() {
     setAnchorElAssets(null);
     setAnchorElGrooming(null);
     setAnchorElCheckUp(null);
+    setAnchorElLogout(null);
   };
 
   return (
@@ -236,16 +238,31 @@ function Header() {
             <CallOutlinedIcon/>
             <div>Call</div>
           </Button>
-          <Button className={classes.loginBox} onClick={(e) => {
-            navigate("/login")
-          }}>
+          <Button className={classes.loginBox} onClick={(e) => handleClick(e, 'logout')}>
             <AccountCircleOutlinedIcon />
-            <div>Login / Sign Up</div>
+            <div style={{margin:'0px 5px'}}>{`  Hi ${user.name}  `}</div>
+            {!anchorElLogout ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+            {/* <div className={classes.logoutBtn} onClick={handleLogout}>Logout</div> */}
           </Button>
+          <Menu
+              anchorEl={anchorElLogout}
+              keepMounted
+              open={Boolean(anchorElLogout)}
+              onClose={handleClose}
+              style={{
+                position: "absolute",
+                top: "30px",
+              }}
+            >
+              <MenuItem onClick={(e) => {
+                handleClose();
+                handleLogout();
+              }}>Logout</MenuItem>
+            </Menu>
         </div>
       </div>
     </div>
   );
 }
 
-export default Header;
+export default AuthorizedHeader;
