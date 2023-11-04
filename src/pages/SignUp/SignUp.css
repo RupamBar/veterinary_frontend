@@ -10,6 +10,7 @@
 }
 
 .form {
+    width: 25vw;
     padding: 40px;
     background-color: white;
     box-shadow: 1px 1px 10px 5px rgb(156, 150, 150);
@@ -21,4 +22,18 @@
 
 .signUpFieldsBtn {
     margin-top: 60px;
+}
+
+.errMsg{
+    font-size: 10px;
+    text-align: left;
+    color: red;
+}
+
+.loginLink {
+    margin-top: 20px;
+    font-size: 10px;
+    color: DodgerBlue;
+    text-decoration: underline;
+    cursor: pointer;
 }
