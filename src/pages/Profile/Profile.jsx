@@ -6,6 +6,8 @@ import {makeStyles} from "@material-ui/core";
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import AuthorizedHeader from '../../components/Header/AuthorizedHeader';
+import AdminDashboard from '../../components/AdminDashboard/AdminDashboard';
+import CustomerProfile from '../../components/CustomerProfile/CustomerProfile';
 
 const useStyles = makeStyles({
   logoutBtn : {
@@ -59,38 +61,9 @@ function Profile() {
   return (
         user ? 
         <>
+          {/* create a separate component for admin and user profile */}
           <AuthorizedHeader user={user} handleLogout={handleLogout}/>
-          <div className='adminDashboard'>
-            <div className='innerDiv'>
-              <h2 className='dashboardHeader'>Admin Dashboard</h2>
-              <div className='usersMainContainer firstelement'>
-                <h3>Manage Users</h3>
-                <div className='userContainer'>
-                  <div className='dashCards'>Manage Customers</div>
-                  <div className='dashCards'>Manage Doctors</div>
-                  <div className='dashCards'>Manage Employees</div>
-                </div>
-              </div>
-              <div className='usersMainContainer'>
-                <h3>Manage Products</h3>
-                <div className='userContainer'>
-                  <div className='dashCards'>Manage Animals</div>
-                  <div className='dashCards'>Manage Foods</div>
-                  <div className='dashCards'>Manage Assets</div>
-                  <div className='dashCards'>Manage Medicines</div>
-                </div>
-              </div>
-              <div className='usersMainContainer'>
-                <h3>Manage Services</h3>
-                <div className='userContainer'>
-                  <div className='dashCards'>Check ups</div>
-                  <div className='dashCards'>Grooming</div>
-                  <div className='dashCards'>Prescriptions</div>
-                  <div className='dashCards'>Payments</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {user.email === "admin@gmail.com" ? <AdminDashboard user={user} handleLogout={handleLogout}/> : <CustomerProfile user={user} handleLogout={handleLogout}/>}
         </>
         :
         <>
