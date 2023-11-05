@@ -8,6 +8,7 @@ import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
 import CallOutlinedIcon from '@material-ui/icons/CallOutlined';
 import "./Header.css";
 import { makeStyles } from "@material-ui/core";
+import Logo from "./VTSLogo.png"
 
 const useStyles = makeStyles((theme) => ({
   // Define your styles here
@@ -75,7 +76,7 @@ function AuthorizedHeader({user, handleLogout}) {
       <div className="navbar">
         <div className="logoDiv">
           <img
-            src="https://www.petsy.online/cdn/shop/files/Petsy_Powered_By_Zigly_2023-08-31_Light_BG_200x80_eeecf7e4-8f86-4f45-8aa3-56005c977f58_200x80.png?v=1693476815"
+            src={Logo}
             alt="Logo"
             width="150px"
           />
